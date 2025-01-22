@@ -12,7 +12,7 @@
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
 [submodule "lib/uniswap-v3-oracle"]
 	path = lib/uniswap-v3-oracle
-	url = https://github.com/mean-finance/uniswap-v3-oracle
+	url = https://github.com/Balmy-protocol/uniswap-v3-oracle
 [submodule "lib/v3-core"]
 	path = lib/v3-core
 	url = https://github.com/uniswap/v3-core
