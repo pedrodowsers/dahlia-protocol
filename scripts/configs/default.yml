@@ -1,0 +1,110 @@
+DAHLIA_OWNER: ${WALLET_ADDRESS}
+TIMELOCK_DELAY: "172800"
+FEES_RECIPIENT: ${WALLET_ADDRESS}
+DEPLOYER_PRIVATE_KEY: ${PRIVATE_KEY}
+WRAPPED_VAULT_FACTORY_PROTOCOL_FEE: "40000000000000000" # 4% - 0.04e18
+WRAPPED_VAULT_FACTORY_MIN_FRONTEND_FEE: "0"
+# Royco Points Factory looks like identical on all networks
+# https://etherscan.io/address/0x75E502644284eDf34421f9c355D75DB79e343Bca#readContract
+# https://sepolia.etherscan.io/address/0x19112adbdafb465ddf0b57ecc07e68110ad09c50#code
+POINTS_FACTORY: "0x19112AdBDAfB465ddF0b57eCC07E68110Ad09c50"
+
+# Deploy on all networks
+VariableIrm:
+  - ZERO_UTIL_RATE: "31649410"
+    MIN_FULL_UTIL_RATE: "15824704600" # 20%
+    MAX_FULL_UTIL_RATE: "158247046000"
+    MIN_TARGET_UTILIZATION: "88000" # 88%
+    MAX_TARGET_UTILIZATION: "92000" # 92%
+    TARGET_UTILIZATION: "90000" # 90%
+    RATE_HALF_LIFE: "604800" # 7 days
+    TARGET_RATE_PERCENT: "200000000000000000" # 20% 0.2e18
+    IRM_NAME: "Variable IRM_20"
+
+mainnet:
+  RPC_URL: ${MAINNET_RPC_URL}
+  BLOCK_NUMBER: "21636077"
+  SCANNER_BASE_URL: https://etherscan.io
+  RPC_PORT: "8546"
+  OTTERSCAN_PORT: "28546"
+  erc20:
+    USDC: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+    WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+    WSTETH: "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0" # https://etherscan.io/token/0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0
+  ChainlinkWstETHToETH:
+    - WSTETH: ${mainnet.erc20.WSTETH}
+      STETH_ETH_FEED: "0x86392dC19c0b719886221c78AB11eb8Cf5c52812" # https://data.chain.link/feeds/ethereum/mainnet/steth-eth
+  DahliaPythOracleFactory: # skip deployment
+  DahliaPythOracle: # skip deployment
+  WrappedVault: # define later
+
+sepolia:
+  RPC_URL: ${SEPOLIA_RPC_URL}
+  BLOCK_NUMBER: "7503368"
+  SCANNER_BASE_URL: https://sepolia.etherscan.io
+  RPC_PORT: "8547"
+  OTTERSCAN_PORT: "28547"
+  erc20:
+    USDC: "0xca6c31cc71fb8f00dc2c465299f605039e0e1f4b"
+    WETH: "0x7b79995e5f793a07bc00c21412e50ecae098e7f9"
+  ChainlinkWstETHToETH: # skip deployment
+  DahliaPythOracleFactory: # skip deployment
+  DahliaPythOracle: # skip deployment
+  WrappedVault: # define later
+
+bartio:
+  RPC_URL: https://bartio.rpc.berachain.com
+  BLOCK_NUMBER: "9435809"
+  SCANNER_BASE_URL: https://bartio.beratrail.io
+  RPC_PORT: "8549"
+  OTTERSCAN_PORT: "28549"
+  erc20:
+    USDC: "0xd6D83aF58a19Cd14eF3CF6fe848C9A4d21e5727c"
+    WETH: "0xE28AfD8c634946833e89ee3F122C06d7C537E8A8"
+  ChainlinkWstETHToETH: # skip deployment
+  DahliaPythOracleFactory: # skip deployment
+  DahliaPythOracle: # skip deployment
+  WrappedVault: # define later
+
+cartio:
+  RPC_URL: https://teddilion-eth-cartio.berachain.com
+  BLOCK_NUMBER: "4446497"
+  SCANNER_BASE_URL: https://80000.testnet.routescan.io
+  RPC_PORT: "8548"
+  OTTERSCAN_PORT: "28548"
+  erc20:
+    WBERA: "0x6969696969696969696969696969696969696969"
+    STONE: "0x1da4dF975FE40dde074cBF19783928Da7246c515"
+    USDC: "0x015fd589F4f1A33ce4487E12714e1B15129c9329"
+    WETH: "0x2d93FbcE4CffC15DD385A80B3f4CC1D4E76C38b3" # WETH https://80000.testnet.routescan.io/token/0x2d93FbcE4CffC15DD385A80B3f4CC1D4E76C38b3
+  ChainlinkWstETHToETH: # skip deployment
+  DahliaPythOracleFactory:
+    - PYTH_STATIC_ORACLE_ADDRESS: "0xDd24F84d36BF92C65F92307595335bdFab5Bbd21"
+  DahliaPythOracle:
+    - PYTH_ORACLE_BASE_TOKEN: ${cartio.erc20.STONE}
+      PYTH_ORACLE_BASE_FEED: "0xc1304032f924ebde0d52dd804ff7e7d095f7b4d4eff809cae7f12b7136e089c0"
+      PYTH_ORACLE_QUOTE_TOKEN: ${cartio.erc20.WETH}
+      PYTH_ORACLE_QUOTE_FEED: "0x86d196443d86a992f6c4ce38779cdfa36b649e43052ef8bedbe0b503029a94c2"
+      PYTH_ORACLE_BASE_MAX_DELAY: "86400"
+      PYTH_ORACLE_QUOTE_MAX_DELAY: "86400"
+    - PYTH_ORACLE_BASE_TOKEN: ${cartio.erc20.WBERA}
+      PYTH_ORACLE_BASE_FEED: "0x40dd8c66a9582c51a1b03a41d6c68ee5c2c04c8b9c054e81d0f95602ffaefe2f"
+      PYTH_ORACLE_QUOTE_TOKEN: ${cartio.erc20.USDC}
+      PYTH_ORACLE_QUOTE_FEED: "0x41f3625971ca2ed2263e78573fe5ce23e13d2558ed3f2e47ab0f84fb9e7ae722"
+      PYTH_ORACLE_BASE_MAX_DELAY: "86400"
+      PYTH_ORACLE_QUOTE_MAX_DELAY: "86400"
+  WrappedVault:
+    - MARKET_NAME: "STONE/WETH (92% LLTV)"
+      MARKET_COLLATERAL: ${cartio.erc20.STONE} # STONE https://80000.testnet.routescan.io/address/0x1da4dF975FE40dde074cBF19783928Da7246c515
+      MARKET_LOAN: ${cartio.erc20.WETH}
+      MARKET_ORACLE: ${DEPLOYED_PYTH_ORACLE_0} # see config-deployed.yml
+      MARKET_LLTV: "92000" # 92%
+      MARKET_LIQUIDATION_BONUS_RATE: "6000" # 6%
+      MARKET_IRM: ${DEPLOYED_IRM_0} # see config-deployed.yml
+    - MARKET_NAME: "WBERA/USDC (80% LLTV)"
+      MARKET_COLLATERAL: ${cartio.erc20.WBERA} # WBERA https://80000.testnet.routescan.io/token/0x6969696969696969696969696969696969696969
+      MARKET_LOAN: ${cartio.erc20.USDC} # USDC https://80000.testnet.routescan.io/token/0x015fd589F4f1A33ce4487E12714e1B15129c9329
+      MARKET_ORACLE: ${DEPLOYED_PYTH_ORACLE_1} # see config-deployed.yml
+      MARKET_LLTV: "80000" # 80%
+      MARKET_LIQUIDATION_BONUS_RATE: "15000" # 15%
+      MARKET_IRM: ${DEPLOYED_IRM_0} # see config-deployed.yml

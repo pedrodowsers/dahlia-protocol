@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "reason-string": "error",
+    "state-visibility": "error",
+    "func-visibility": ["error", { "ignoreConstructors": true }],
+    "no-console": "error",
+    "explicit-types": "error"
+  }
+}

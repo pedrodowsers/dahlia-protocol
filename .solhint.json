@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "imports-on-top": "error",
+    "no-unused-vars": "error",
+    "no-unused-import": ["error", 130],
+    "no-global-import": "warn"
+  }
+}

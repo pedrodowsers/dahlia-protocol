@@ -1,0 +1,36 @@
+{
+  "name": "docker-otterscan",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "docker/otterscan",
+  "type": "library",
+  "targets": {
+    "setup": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run docker-blockscout:clean",
+          "nx run docker-otterscan:clean",
+          "docker compose up --build --remove-orphans -d"
+        ],
+        "cwd": "docker/otterscan/",
+        "parallel": false
+      }
+    },
+    "up": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["docker compose up -d"],
+        "cwd": "docker/otterscan/",
+        "parallel": false
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["docker compose down"],
+        "cwd": "docker/otterscan/",
+        "parallel": false
+      }
+    }
+  }
+}

@@ -1,0 +1,132 @@
+volumes:
+  redis-data:
+    name: dalia-blockscout-redis-data
+  blockscout-db-data:
+    name: dalia-blockscout-db-data
+  logs:
+    name: dalia-blockscout-logs
+  stats-db-data:
+    name: dalia-blockscout-stats-db-data
+
+services:
+  rpc:
+    build:
+      context: hardhat
+      dockerfile: Dockerfile
+    ports:
+      - "8546:8545"
+  #  otterscan:
+  #    image: otterscan/otterscan:v2.6.0
+  #    environment:
+  #      - ERIGON_URL=http://localhost:8546
+  #    ports:
+  #      - "8547:80"
+  #  rpc:
+  #    build:
+  #      context: anvil
+  #      dockerfile: Dockerfile
+  #    platform: linux/amd64
+  #    command: >
+  #      --host 0.0.0.0
+  #      --fork-url https://eth-rpc.dahliadev.xyz
+  #      --fork-block-number 20720117
+  #      --steps-tracing
+  #      --gas-limit 30000000
+  #      --gas-price 0
+  #      --block-base-fee-per-gas 0
+  ##      --mixed-mining
+  ##      --block-time 15
+  #    ports:
+  #      - "8546:8545"
+  redis-db:
+    extends:
+      file: ./services/redis.yml
+      service: redis-db
+
+  db-init:
+    extends:
+      file: ./services/db.yml
+      service: db-init
+
+  db:
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    extends:
+      file: ./services/db.yml
+      service: db
+
+  backend:
+    depends_on:
+      - db
+      - redis-db
+    extends:
+      file: ./services/backend.yml
+      service: backend
+    links:
+      - db:database
+    environment:
+      ETHEREUM_JSONRPC_VARIANT: "geth"
+      ETHEREUM_JSONRPC_WS_URL: ws://rpc:8545/
+      INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: "false"
+      # https://docs.blockscout.com/setup-and-run-blockscout/env-variables/backend-env-variables
+      INDEXER_INTERNAL_TRANSACTIONS_TRACER_TYPE: "call_tracer"
+      CHAIN_ID: "1"
+
+  visualizer:
+    extends:
+      file: ./services/visualizer.yml
+      service: visualizer
+
+  sig-provider:
+    extends:
+      file: ./services/sig-provider.yml
+      service: sig-provider
+
+  frontend:
+    depends_on:
+      - backend
+    extends:
+      file: ./services/frontend.yml
+      service: frontend
+    environment:
+      NEXT_PUBLIC_NETWORK_ID: "31337"
+      NEXT_PUBLIC_NETWORK_RPC_URL: http://rpc:8545/
+
+  stats-db-init:
+    extends:
+      file: ./services/stats.yml
+      service: stats-db-init
+
+  stats-db:
+    depends_on:
+      stats-db-init:
+        condition: service_completed_successfully
+    extends:
+      file: ./services/stats.yml
+      service: stats-db
+
+  stats:
+    depends_on:
+      - stats-db
+      - backend
+    extends:
+      file: ./services/stats.yml
+      service: stats
+
+  user-ops-indexer:
+    depends_on:
+      - db
+      - backend
+    extends:
+      file: ./services/user-ops-indexer.yml
+      service: user-ops-indexer
+
+  proxy:
+    depends_on:
+      - backend
+      - frontend
+      - stats
+    extends:
+      file: ./services/nginx.yml
+      service: proxy

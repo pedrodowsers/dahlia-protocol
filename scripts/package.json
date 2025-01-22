@@ -1,0 +1,57 @@
+{
+  "name": "scripts",
+  "description": "Dahlia Scripts",
+  "license": "MIT",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "prepare": "pnpm tsx src/setup.ts submodules",
+    "setup": "pnpm tsx src/setup.ts",
+    "recreate-docker-otterscan": "pnpm tsx src/recreate-docker-otterscan.ts",
+    "deploy-all": "pnpm tsx src/deploy-all.ts",
+    "deploy-points-factory": "pnpm tsx src/deploy.ts --script PointsFactory",
+    "deploy-dahlia-registry": "pnpm tsx src/deploy.ts --script DahliaRegistry",
+    "deploy-irm-factory": "pnpm tsx src/deploy.ts --script IrmFactory",
+    "deploy-variable-irm": "pnpm tsx src/deploy.ts --script VariableIrm",
+    "deploy-dahlia": "pnpm tsx src/deploy.ts --script Dahlia",
+    "deploy-wrapped-vault-implementation": "pnpm tsx src/deploy.ts --script WrappedVaultImplementation",
+    "deploy-wrapped-vault-factory": "pnpm tsx src/deploy.ts --script WrappedVaultFactory",
+    "deploy-timelock": "pnpm tsx src/deploy.ts --script Timelock",
+    "deploy-dahlia-pyth-oracle-factory": "pnpm tsx src/deploy.ts --script DahliaPythOracleFactory",
+    "deploy-chainlink-wsteth-eth": "pnpm tsx src/deploy.ts --script ChainlinkWstETHToETH",
+    "deploy-dahlia-pyth-oracle": "pnpm tsx src/deploy.ts --script DahliaPythOracle",
+    "deploy-wrapped-vault": "pnpm tsx src/deploy.ts --script WrappedVault",
+    "deploy-dahlia-registry-transfer": "pnpm tsx src/deploy.ts --script DahliaRegistryTransfer"
+  },
+  "author": {
+    "name": "Dahlia Labs",
+    "email": "info@dahlia.xyz"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/lodash": "^4.17.14",
+    "@types/shelljs": "^0.8.15",
+    "commander": "^13.0.0",
+    "execa": "^9.5.2",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "shelljs": "^0.8.5",
+    "strip-ansi": "^7.1.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "viem": "^2.22.9"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports"
+    ],
+    "importOrder": [
+      "^@",
+      "^\\.\\.",
+      "^\\."
+    ],
+    "importOrderSeparation": true
+  }
+}

@@ -1,0 +1,15 @@
+artifacts
+cache
+cache_hardhat
+types
+lib
+.husky/_
+.vscode
+.idea
+node_modules
+out
+docker/blockscout/services
+pnpm-lock.yaml
+.env
+.env.local
+scripts/configs/docker.yml

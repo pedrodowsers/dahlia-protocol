@@ -1,0 +1,14 @@
+{
+  "erigonURL": "http://localhost:8546",
+  "beaconAPI": "",
+  "assetsURLPrefix": "",
+  "experimental": "",
+  "branding": {
+    "siteName": "My Otterscan",
+    "networkTitle": "Dev Network"
+  },
+  "sourcifySources": {
+    "ipfs": "https://ipfs.io/ipns/repo.sourcify.dev",
+    "central_server": "http://sourcify:5555/verify"
+  }
+}

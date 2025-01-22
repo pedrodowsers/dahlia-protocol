@@ -1,0 +1,39 @@
+# Please use `pnpm nx run scripts:recreate-docker-otterscan`
+# This should read config/default.yaml and set the environment variables
+services:
+  anvil:
+    build:
+      context: anvil
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    environment:
+      - ANVIL_IP_ADDR=0.0.0.0
+    command: >
+      --fork-url ${RPC_URL}
+      --fork-block-number ${BLOCK_NUMBER}
+    ports:
+      - "${RPC_PORT}:8545"
+
+  otterscan:
+    image: otterscan/otterscan:v2.6.1
+    depends_on:
+      - anvil
+    environment:
+      #      - DISABLE_CONFIG_OVERWRITE=1
+      - ERIGON_URL=http://localhost:${RPC_PORT}
+    ports:
+      - "${OTTERSCAN_PORT}:80"
+#  sourcify:
+##    image: ghcr.io/ethereum/sourcify/server:1.7.0
+#    build:
+#      context: sourcify
+#      dockerfile: Dockerfile
+#    environment:
+#      DOCKER_HOST_POSTGRES_TEST_PORT: 5432
+#      SOURCIFY_POSTGRES_HOST: "db"
+#      SOURCIFY_POSTGRES_DB: "sourcify"
+#      SOURCIFY_POSTGRES_USER: "sourcify"
+#      SOURCIFY_POSTGRES_PASSWORD: "sourcify"
+#      SOURCIFY_POSTGRES_PORT: 5432
+#    ports:
+#      - "5555:5555"

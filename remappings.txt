@@ -1,0 +1,9 @@
+@chainlink/contracts/=lib/chainlink-brownie-contracts/contracts/src/
+@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/
+@forge-std/=lib/forge-std/src/
+@royco/=lib/royco/src/
+@solady/=lib/solady/src/
+@solmate/=lib/solmate/src/
+@uniswap/v3-core/=lib/v3-core/
+@uniswap-v3-oracle/=lib/uniswap-v3-oracle/
+@pythnetwork/pyth-sdk-solidity/=lib/pyth-sdk-solidity/

@@ -1,0 +1,11 @@
+{
+  "1": {
+    "sourcifyName": "Ethereum Mainnet",
+    "supported": true,
+    "etherscanApi": {
+      "apiURL": "https://api.etherscan.io",
+      "apiKeyEnvName": "2QPX1M2A5IZ59QU1XT2176Y8EPQBFZYDY5"
+    },
+    "rpc": ["http://anvil:8545"]
+  }
+}

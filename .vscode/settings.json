@@ -1,0 +1,24 @@
+{
+  "editor.formatOnSave": true,
+  "[solidity]": {
+    "editor.defaultFormatter": "JuanBlanco.solidity"
+  },
+  "solidity.formatter": "forge",
+  "solidity.compileUsingRemoteVersion": "v0.8.27+commit.40a35a09",
+  "prettier.configPath": "package.json",
+  "solidity.remappings": [
+    "@openzeppelin/=/lib/openzeppelin-contracts/",
+    "forge-std/=lib/forge-std/src/",
+    "royco/=lib/royco/src/"
+  ],
+  "solidity-va.tools.surya.option.negModifiers": false,
+  "solidity-va.preview.markdown": true,
+  "slither.solcPath": "",
+  "slither.hiddenDetectors": [],
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/tmp": true,
+    "**/out/**": true
+  }
+}

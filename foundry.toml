@@ -1,0 +1,39 @@
+[profile.default]
+solc_version = "0.8.27"
+src = "src"
+rpc_url = "http://0.0.0.0:8545"
+out = "out"
+libs = ["lib"]
+optimizer_runs = 200
+via_ir = true
+
+[profile.default.fmt]
+# copied from Royco
+line_length = 160
+bracket_spacing = true
+number_underscore = "thousands"
+wrap_comments = true
+int_types = "long"
+#multiline_func_header = "all"
+quote_style = "double"
+# end of copied from Royco
+#single_line_statement_blocks = "multi"
+multiline_func_header = "attributes_first" # improve readability
+sort_imports = true
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+
+[profile.default.fuzz]
+runs = 256
+[profile.default.invariant]
+runs = 256
+
+[rpc_endpoints]
+sepolia = "${SEPOLIA_RPC_URL}"
+mainnet = "${MAINNET_RPC_URL}"
+bartio = "${BARTIO_RPC_URL}"
+cartio = "${CARTIO_RPC_URL}"
+
+[etherscan]
+# https://github.com/foundry-rs/foundry/issues/4484
+80000 = { key = "verifyContract", url = "https://api.routescan.io/v2/network/testnet/evm/80000/etherscan" }
+80084 = { key = "verifyContract", url = "https://api.routescan.io/v2/network/testnet/evm/80084/etherscan" }

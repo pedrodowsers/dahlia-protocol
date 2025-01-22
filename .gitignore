@@ -1,0 +1,50 @@
+# Compiler files
+cache/
+out/
+tmp/
+
+# Ignores development broadcast logs
+/broadcast
+
+# Docs
+docs/
+
+# Dotenv file
+.env.local
+
+# Node modules
+/node_modules
+
+# Certora
+.certora**
+emv-*-certora*
+
+# Hardhat
+/types
+/cache_hardhat
+/artifacts
+
+node_modules
+
+# Hardhat files
+/cache
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json
+
+# Hardhat Ignition default folder for deployments against a local node
+ignition/deployments/chain-31337
+
+
+
+.nx/cache
+.nx/workspace-data
+
+.nx
+slither.db.json
+lcov.info
